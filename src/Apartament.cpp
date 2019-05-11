@@ -39,8 +39,10 @@ std::ostream& operator << (std::ostream &output,Apartament &a)
 {
     return a.display(output);
 }
-Apartament Apartament::operator = (Apartament &L2)
+Apartament& Apartament::operator = (Apartament &L2)
 {
+    if(&L2==this)
+        return L2;
     if(nume_client!=NULL)
         delete[] nume_client;
     nume_client=new char[strlen(L2.nume_client)+1];

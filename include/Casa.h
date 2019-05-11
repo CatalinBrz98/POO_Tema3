@@ -1,7 +1,8 @@
 #ifndef CASA_H
 #define CASA_H
 #include "Locuinta.h"
-class Casa:public Locuinta{
+class Casa:public Locuinta
+{
 private:
 protected:
     float curte,*supr_pe_etaj;
@@ -13,7 +14,7 @@ public:
     ~Casa();
     friend std::istream& operator >> (std::istream &input,Casa &a);
     friend std::ostream& operator << (std::ostream &output,Casa &a);
-    Casa operator = (Casa &a);
+    Casa& operator = (Casa &a);
     std::ostream& display(std::ostream &output);
     static float pret_curte;
     float cost();

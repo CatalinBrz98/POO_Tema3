@@ -10,7 +10,7 @@ Casa::Casa(char *nume, float s, float d,float c, short int e, float *s_e): Locui
     curte=c;
     etaje=e;
     supr_pe_etaj=new float[etaje];
-    for(e=0;e<etaje;e++)
+    for(e=0; e<etaje; e++)
         supr_pe_etaj[e]=s_e[e];
 }
 Casa::Casa(const Casa &L2): Locuinta(L2)
@@ -18,7 +18,7 @@ Casa::Casa(const Casa &L2): Locuinta(L2)
     curte=L2.curte;
     etaje=L2.etaje;
     supr_pe_etaj=new float[etaje];
-    for(int i=0;i<etaje;i++)
+    for(int i=0; i<etaje; i++)
         supr_pe_etaj[i]=L2.supr_pe_etaj[i];
 }
 Casa::~Casa()
@@ -39,7 +39,7 @@ std::istream& operator >> (std::istream &input,Casa &a)
     a.curte=c;
     a.etaje=e;
     a.supr_pe_etaj=new float[e];
-    for(e=0;e<a.etaje;e++)
+    for(e=0; e<a.etaje; e++)
         input>>a.supr_pe_etaj[e];
     return input;
 }
@@ -48,7 +48,7 @@ std::ostream& Casa::display(std::ostream &output)
     if(nume_client==NULL)
         return output;
     output<<"Casa:\n\tNume client: "<<nume_client<<"\n\tSuprafata utila: "<<suprafata_utila<<"\n\tDiscount: "<<discount<<"\n\tSuprafata curte: "<<curte<<"\n\tEtaje: "<<etaje<<"\n\tSuprafata/etaj (in ordine): "<<supr_pe_etaj[0];
-    for(int i=1;i<etaje;i++)
+    for(int i=1; i<etaje; i++)
         output<<", "<<supr_pe_etaj[i];
     output<<"\n";
     return output;
@@ -57,15 +57,17 @@ std::ostream& operator << (std::ostream &output,Casa &a)
 {
     return a.display(output);
 }
-Casa Casa::operator = (Casa &L2)
+Casa& Casa::operator = (Casa &L2)
 {
+    if(&L2==this)
+        return L2;
     dynamic_cast<Locuinta&> (*this)=dynamic_cast<Locuinta&> (L2);
     curte=L2.curte;
     etaje=L2.etaje;
     if(supr_pe_etaj!=NULL)
         delete[] supr_pe_etaj;
     supr_pe_etaj=new float[etaje];
-    for(int i=0;i<etaje;i++)
+    for(int i=0; i<etaje; i++)
         supr_pe_etaj[i]=L2.supr_pe_etaj[i];
     return *this;
 }

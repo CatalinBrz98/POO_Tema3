@@ -37,6 +37,7 @@
 		<Unit filename="date.in" />
 		<Unit filename="include/Apartament.h" />
 		<Unit filename="include/Casa.h" />
+		<Unit filename="include/Gestiune.h" />
 		<Unit filename="include/Locuinta.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Apartament.cpp" />
