@@ -57,11 +57,11 @@ std::ostream& operator << (std::ostream &output,Casa &a)
 {
     return a.display(output);
 }
-Casa& Casa::operator = (Casa &L2)
+Casa& Casa::operator = (const Casa &L2)
 {
     if(&L2==this)
-        return L2;
-    dynamic_cast<Locuinta&> (*this)=dynamic_cast<Locuinta&> (L2);
+        return *this;
+    *(Locuinta*)this=*(Locuinta*)&L2;
     curte=L2.curte;
     etaje=L2.etaje;
     if(supr_pe_etaj!=NULL)

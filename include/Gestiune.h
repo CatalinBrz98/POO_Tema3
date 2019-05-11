@@ -17,10 +17,10 @@ public:
     friend std::istream& operator >> (std::istream &input,Gestiune<Q> &a);
     template <class Q>
     friend std::ostream& operator << (std::ostream &output,Gestiune<Q> &a);
-    Gestiune<T>& operator = (Gestiune<T> &a);
+    Gestiune<T>& operator = (const Gestiune<T> &a);
     std::ostream& display(std::ostream &output);
 };
-/*template <>
+template <>
 class Gestiune<char*>{
 private:
 protected:
@@ -30,13 +30,11 @@ public:
     Gestiune(char **l, int n);
     Gestiune(const Gestiune<char*> &G2);
     ~Gestiune();
-    template <>
     friend std::istream& operator >> (std::istream &input,Gestiune<char*> &a);
-    template <>
     friend std::ostream& operator << (std::ostream &output,Gestiune<char*> &a);
-    void operator = (Gestiune<char*> &a);
+    Gestiune<char*>& operator = (const Gestiune<char*> &a);
     std::ostream& display(std::ostream &output);
-};*/
+};
 template<class T>
 Gestiune<T>::Gestiune()
 {
@@ -69,6 +67,7 @@ std::istream& operator >> (std::istream &input,Gestiune<T> &a)
         input>>x;
         a.lista.push_back(x);
     }
+    return input;
 }
 template<class T>
 std::ostream& operator << (std::ostream &output,Gestiune<T> &a)
@@ -76,15 +75,89 @@ std::ostream& operator << (std::ostream &output,Gestiune<T> &a)
     return a.display(output);
 }
 template<class T>
-Gestiune<T>& Gestiune<T>::operator = (Gestiune<T> &a)
+Gestiune<T>& Gestiune<T>::operator = (const Gestiune<T> &a)
 {
     if(&a==this)
-        return a;
+        return *this;
     lista.clear();
     lista=a.lista;
 }
 template<class T>
 std::ostream& Gestiune<T>::display(std::ostream &output)
+{
+    for(T i:lista)
+        output<<i<<"\n";
+    return output;
+}
+//char* specialization
+template<>
+Gestiune<char*>::Gestiune()
+{
+    lista.clear();
+}
+template<>
+Gestiune<char*>::Gestiune(char **l, int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        char* aux=new char[strlen(l[i]+1);
+        strcpy(aux,l[i]);
+        lista.push_back(aux);
+    }
+}
+template<>
+Gestiune<char*>::Gestiune(const Gestiune<char*> &G2)
+{
+    for(char* i:G2.lista)
+    {
+        char* aux=new char[strlen(i)+1];
+        strcpy(aux,i);
+        lista.push_back(aux);
+    }
+}
+template<>
+Gestiune<char*>::~Gestiune()
+{
+    for(char* i:G2.lista)
+        delete[] i;
+    lista.clear();
+}
+template<>
+std::istream& operator >> (std::istream &input,Gestiune<char*> &a)
+{
+    int n;
+    char s[100];
+    input>>n;
+    for(int i=0;i<n;i++)
+    {
+        input>>s;
+        char *aux=new char[strlen(s)+1];
+        a.lista.push_back(aux);
+    }
+    return input;
+}
+template<>
+std::ostream& operator << (std::ostream &output,Gestiune<char*> &a)
+{
+    return a.display(output);
+}
+template<>
+Gestiune<char*>& Gestiune<T>::operator = (const Gestiune<char*> &a)
+{
+    if(&a==this)
+        return *this;
+    for(char* i:G2.lista)
+        delete[] i;
+    lista.clear();
+    for(char* i:a.lista)
+    {
+        char* aux=new char[strlen(i)+1];
+        strcpy(aux,i);
+        lista.push_back(aux);
+    }
+}
+template<char>
+std::ostream& Gestiune<char*>::display(std::ostream &output)
 {
     for(T i:lista)
         output<<i<<"\n";

@@ -14,7 +14,7 @@ public:
     ~Casa();
     friend std::istream& operator >> (std::istream &input,Casa &a);
     friend std::ostream& operator << (std::ostream &output,Casa &a);
-    Casa& operator = (Casa &a);
+    Casa& operator = (const Casa &a);
     std::ostream& display(std::ostream &output);
     static float pret_curte;
     float cost();

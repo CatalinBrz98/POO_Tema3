@@ -15,7 +15,7 @@ public:
     ~Locuinta();
     friend std::istream& operator >> (std::istream &input,Locuinta &a);
     friend std::ostream& operator << (std::ostream &output,Locuinta &a);
-    Locuinta& operator = (Locuinta &a);
+    Locuinta& operator = (const Locuinta &a);
     virtual std::ostream& display(std::ostream &output);
     static float pret;
     virtual float cost()=0;

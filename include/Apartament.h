@@ -13,7 +13,7 @@ public:
     ~Apartament();
     friend std::istream& operator >> (std::istream &input,Apartament &a);
     friend std::ostream& operator << (std::ostream &output,Apartament &a);
-    Apartament& operator = (Apartament &a);
+    Apartament& operator = (const Apartament &a);
     std::ostream& display(std::ostream &output);
     float cost();
 };

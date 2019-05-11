@@ -45,10 +45,10 @@ std::ostream& operator << (std::ostream &output,Locuinta &a)
 {
     return a.display(output);
 }
-Locuinta& Locuinta::operator = (Locuinta &L2)
+Locuinta& Locuinta::operator = (const Locuinta &L2)
 {
     if(&L2==this)
-        return L2;
+        return *this;
     if(nume_client!=NULL)
         delete[] nume_client;
     nume_client=new char[strlen(L2.nume_client)+1];
