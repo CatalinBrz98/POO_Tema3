@@ -4,10 +4,11 @@ int main()
 {
     std::ifstream f("date.in");
     f>>Locuinta::pret>>Casa::pret_curte;
-    Gestiune<Casa> l;
-    f>>l;
-    Gestiune<Casa> n=l,m;
-    m=n;
-    std::cout<<l<<n<<m;
+    Gestiune<Locuinta*> l;
+    Apartament a;
+    Casa c1,c2;
+    f>>c1>>a>>c2;
+    ((l+=&c1)+=&a)+=&c2;
+    std::cout<<l;
     return 0;
 }
